@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>词频统计</title>
+    <!-- Bootstrap CSS -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/js/jquery-1.12.4.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/jquery.form.js"></script>
+    <script src="/static/js/index.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">词频统计</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">首页</a></li>
+                <!--<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Java
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">jmeter</a></li>
+                        <li><a href="#">EJB</a></li>
+                        <li><a href="#">Jasper Report</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">分离的链接</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">另一个分离的链接</a></li>
+                    </ul>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <form id="myForm" enctype="multipart/form-data" method="post" action="/solr/upload">
+                <div class="input-group">
+                    <input type="file" class="form-control" name="file"
+                           accept="application/pdf,application/msword,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    <iframe id="output" name="output" style="display: none"></iframe>
+                    <span class="input-group-btn">
+                        <input class="btn btn-success" id="uploadBtn" type="submit" value="开始上传">
+                  </span>
+                </div>
+            </form>
+            <br>
+        </div>
+        <div class="col-sm-2">
+        </div>
+    </div>
+    <div>
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="panel-heading">上传的文件</div>
+
+            <!-- Table -->
+            <table class="table table-hover table-responsive table-bordered">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>大小</th>
+                    <th>结果</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span id="name"></span></td>
+                    <td><span id="type"></span></td>
+                    <td><span id="size"></span></td>
+                    <td>
+                        <span id="result"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加要分析的关键词</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-1 text-center">
+                    <i id="add" class="glyphicon glyphicon-plus" style="cursor: pointer"></i>
+                    <!--<a href="#">-->
+                    <!--<i class="glyphicon glyphicon-minus"></i>-->
+                    <!--</a>-->
+                </div>
+                <div class="col-sm-10">
+                    <div id="spots">
+                        <!--<input type="button" class="btn btn-danger" name="add" value="add" /><br />-->
+                    </div>
+                    <br>
+                    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                    <div id="main" style="width: 100%;height:400px;"></div>
+                </div>
+                <div class="col-sm-1 text-center">
+                    <input type="button" value="词频统计" onclick="fenxi()" class="btn btn-xs btn-success">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<script src="/static/js/echarts.js"></script>-->
+
+</body>
+</html>
